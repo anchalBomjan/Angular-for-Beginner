@@ -1,1 +1,23 @@
-<p>student-list works!</p>
+<div class="container mt-4">
+  <h3 class="mb-3 text-center">🎓 Student List</h3>
+
+  <p-table [value]="students" class="p-datatable-striped p-datatable-gridlines shadow-sm">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Course</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-student>
+      <tr>
+        <td>{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.course }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
