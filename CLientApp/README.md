@@ -1,27 +1,67 @@
 # CLientApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.12.
+##user directive in student components
 
-## Development server
+1create-student component 
+1️⃣ @Input()
+Type: Angular Component property decorator (not a template directive, but related to binding).
+Purpose: Allows parent component to pass data to a child component.
+@Input() student?: Student;
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+2️⃣ @Output()
+Type: Angular Component property decorator.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Purpose: Allows child component to send events/data to the parent.
 
-## Build
+@Output() save = new EventEmitter<Student>();
+        
+          |
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+<app-create-student
+  [(visible)]="displayDialog"
+  [student]="selectedStudent"
+  [isEditMode]="isEditMode"
+  (save)="saveStudent($event)"
+  (cancel)="cancelDialog()"
+></app-create-student>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+3️⃣ [formGroup]
+Type: Attribute Directive (used in Reactive Forms).
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Purpose: Binds a FormGroup object from TS to a <form> element.
 
-## Further help
+Example:<form [formGroup]="studentForm">
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+4️⃣ formControlName
+Type: Attribute Directive (Reactive Forms).
+
+Purpose: Binds a single FormControl inside the FormGroup to an input.
+
+Example:<input type="text" formControlName="name">
+
+5️⃣ *ngIf
+Type: Structural Directive.
+
+Purpose: Adds or removes elements from the DOM based on a condition.
+
+Example:<small *ngIf="studentForm.get('name')?.invalid && studentForm.get('name')?.touched">Name required</small>
+
+6️⃣ (ngSubmit)
+Type: Event Binding (like an attribute directive).
+
+Purpose: Binds the form submit event to a method in your TS.
+
+Example:
+
+7️⃣ (click)
+Type: Event Binding (Attribute Directive).
+
+Purpose: Calls a function when the element is clicked.
+
+Example:  <button (click)="onCancel()">Cancel</button>
+
+
+
