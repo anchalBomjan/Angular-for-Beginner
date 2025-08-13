@@ -1,82 +1,66 @@
-<div class="container mt-4">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="text-success">🎓 Student List</h3>
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-      ➕ Add Student
+<p-toast></p-toast>
+
+<p-button label="Add Student" icon="pi pi-plus" (click)="openNewStudentDialog()"></p-button>
+
+<p-table [value]="students" [paginator]="true" [rows]="5" styleClass="p-mt-3">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Course</th>
+      <th>Actions</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-student>
+    <tr>
+      <td>{{student.id}}</td>
+      <td>{{student.name}}</td>
+      <td>{{student.email}}</td>
+      <td>{{student.course}}</td>
+      <td>
+        <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text" (click)="openEditStudentDialog(student)"></button>
+        <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="openDeleteDialog(student)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- Child dialog -->
+<app-create-student
+  [(visible)]="displayDialog"
+  [student]="selectedStudent"
+  [isEditMode]="isEditMode"
+  (save)="saveStudent($event)"
+  (cancel)="cancelDialog()"
+></app-create-student>
+
+
+<!-- Delete Confirmation Dialog -->
+<p-dialog 
+    header="Confirm Delete" 
+    [(visible)]="deleteDialogVisible" 
+    [modal]="true" 
+    [closable]="false"
+    [style]="{width: '400px'}">
+
+  <p>Are you sure you want to delete <strong>{{studentToDelete?.name}}</strong>?</p>
+
+  <p-footer>
+    <button pButton 
+            type="button" 
+            label="Cancel" 
+            icon="pi pi-times" 
+            class="p-button-text" 
+            (click)="cancelDelete()">
     </button>
-  </div>
 
-  <p-table [value]="students" class="p-datatable-striped p-datatable-gridlines shadow-sm">
-    <ng-template pTemplate="header">
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Course</th>
-        <th>Actions</th>
-      </tr>
-    </ng-template>
-
-    <ng-template pTemplate="body" let-s>
-      <tr>
-        <td>{{ s.id }}</td>
-        <td>{{ s.name }}</td>
-        <td>{{ s.email }}</td>
-        <td>{{ s.course }}</td>
-        <td>
-          <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#editModal" (click)="openEditModal(s)">✏</button>
-          <button class="btn btn-danger btn-sm" (click)="deleteStudent(s.id)">🗑</button>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
-</div>
-
-<!-- Add Modal -->
-<div class="modal fade" id="addModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title">Add Student</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <form [formGroup]="addForm" (ngSubmit)="addStudent()">
-        <div class="modal-body">
-          <input type="text" formControlName="name" placeholder="Name" class="form-control mb-2"
-            [ngClass]="{'is-invalid': addForm.get('name')?.invalid && addForm.get('name')?.touched}" />
-
-          <input type="email" formControlName="email" placeholder="Email" class="form-control mb-2"
-            [ngClass]="{'is-invalid': addForm.get('email')?.invalid && addForm.get('email')?.touched}" />
-
-          <input type="text" formControlName="course" placeholder="Course" class="form-control"
-            [ngClass]="{'is-invalid': addForm.get('course')?.invalid && addForm.get('course')?.touched}" />
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" [disabled]="addForm.invalid" data-bs-dismiss="modal">Save</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- Edit Modal -->
-<div class="modal fade" id="editModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-warning">
-        <h5 class="modal-title">Edit Student</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <form [formGroup]="editForm" (ngSubmit)="saveEdit()">
-        <div class="modal-body">
-          <input type="text" formControlName="name" placeholder="Name" class="form-control mb-2" />
-          <input type="email" formControlName="email" placeholder="Email" class="form-control mb-2" />
-          <input type="text" formControlName="course" placeholder="Course" class="form-control" />
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-warning" [disabled]="editForm.invalid" data-bs-dismiss="modal">Update</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+    <button pButton 
+            type="button" 
+            label="Delete" 
+            icon="pi pi-check" 
+            class="p-button-danger" 
+            (click)="confirmDelete()">
+    </button>
+  </p-footer>
+</p-dialog>

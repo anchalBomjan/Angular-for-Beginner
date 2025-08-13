@@ -1,1 +1,26 @@
-<p>create-student works!</p>
+<p-dialog [(visible)]="visible" [modal]="true" [closable]="false" [header]="isEditMode ? 'Edit Student' : 'Add Student'" [style]="{width: '400px'}" (onHide)="onCancel()">
+  <form [formGroup]="studentForm" (ngSubmit)="onSave()">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="name">Name</label>
+        <input id="name" type="text" pInputText formControlName="name" />
+        <small *ngIf="studentForm.get('name')?.invalid && studentForm.get('name')?.touched" class="p-error">Name is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="email">Email</label>
+        <input id="email" type="email" pInputText formControlName="email" />
+        <small *ngIf="studentForm.get('email')?.invalid && studentForm.get('email')?.touched" class="p-error">Valid email is required.</small>
+      </div>
+      <div class="p-field">
+        <label for="course">Course</label>
+        <input id="course" type="text" pInputText formControlName="course" />
+        <small *ngIf="studentForm.get('course')?.invalid && studentForm.get('course')?.touched" class="p-error">Course is required.</small>
+      </div>
+
+      <p-footer>
+        <button pButton label="Cancel" icon="pi pi-times" type="button" class="p-button-text" (click)="onCancel()"></button>
+        <button pButton label="Save" icon="pi pi-check" type="submit" [disabled]="studentForm.invalid"></button>
+      </p-footer>
+    </div>
+  </form>
+</p-dialog>
