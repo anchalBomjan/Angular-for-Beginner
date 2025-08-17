@@ -1,0 +1,8 @@
+
+    <h2>Parent Component</h2>
+    <input [(ngModel)]="parentMessage" placeholder="Type a message..." />
+    <button (click)="changeValue()">Change Value</button>
+
+    <app-child [data]="parentMessage">
+      <p #projected>🌟 Projected Content from Parent: {{ parentMessage }}</p>
+    </app-child>

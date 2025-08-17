@@ -1,0 +1,6 @@
+  <h3>Child Component</h3>
+    <p>Received from Parent via @Input: <b>{{ data }}</b></p>
+
+    <ng-content></ng-content> <!-- Projected content -->
+
+    <p #viewElement>👀 This is Child's own View Element<b>{{data}}</b></p>

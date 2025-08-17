@@ -65,3 +65,30 @@ Example:  <button (click)="onCancel()">Cancel</button>
 
 
 
+## NOTE
+How lifecycle hooks apply here:
+
+constructor → Your UserListComponent is created. No data yet.
+
+ngOnInit → Initialize data, fetch users from API.
+
+ngOnChanges (inside <app-user-details>) → Will fire whenever selectedUser changes (input from parent).
+
+ngAfterContentInit/Checked → Only relevant if you project content with <ng-content> inside your custom components. PrimeNG’s p-dialog already handles this internally.
+
+ngAfterViewInit/Checked → If you need to manipulate DOM elements inside p-dialog, you could use these. Otherwise, not required.
+
+ngOnDestroy → Runs when your UserListComponent or UserDetailsComponent is destroyed (for cleanup).
+
+-------------------------------------------------------------------------
+No, you don’t need to use all those hooks manually when using p-dialog.
+
+You mainly use:
+
+ngOnInit → to fetch data / initialize form.
+
+ngOnChanges → if passing updated data into the dialog (like edit user).
+
+ngOnDestroy → to clean up subscriptions when component is closed or destroyed.
+
+All the other hooks (ngDoCheck, ngAfterContentInit, ngAfterViewInit) are only needed in special cases (e.g., custom change detection, DOM manipulation, projected content).
