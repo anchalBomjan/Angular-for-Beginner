@@ -6,8 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-import { HomeModule } from './features/home/home.module';
-import { StudentModule } from './features/student/student.module';
 
 @NgModule({
   declarations: [
@@ -16,12 +14,12 @@ import { StudentModule } from './features/student/student.module';
   ],
   imports: [
     
-    BrowserModule,
+   BrowserModule,
    BrowserAnimationsModule,
-    SharedModule,
-    AppRoutingModule,
-    HomeModule,
-    StudentModule
+   SharedModule,
+   AppRoutingModule,
+ 
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
