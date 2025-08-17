@@ -8,8 +8,16 @@ import { Component } from '@angular/core';
 export class ParentComponent {
 
     parentMessage = "Hello Child";
+      childInput = '';
+
 
   changeValue() {
     this.parentMessage = "Updated at " + new Date().toLocaleTimeString();
   }
+
+
+    receiveChildData(data: { inputValue: string }) {
+    this.childInput = data.inputValue;
+  }
+
 }

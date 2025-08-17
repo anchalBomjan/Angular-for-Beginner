@@ -3,6 +3,10 @@
     <input [(ngModel)]="parentMessage" placeholder="Type a message..." />
     <button (click)="changeValue()">Change Value</button>
 
-    <app-child [data]="parentMessage">
+    <app-child [data]="parentMessage"
+    (dataChanged)="receiveChildData($event)">
       <p #projected>🌟 Projected Content from Parent: {{ parentMessage }}</p>
     </app-child>
+
+     <p>Received from Child:</p>
+     <p>Input: {{ childInput }}</p>

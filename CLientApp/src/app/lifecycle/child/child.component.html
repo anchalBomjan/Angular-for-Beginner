@@ -3,4 +3,12 @@
 
     <ng-content></ng-content> <!-- Projected content -->
 
+  <!--<p #viewElement>👀 This is Child's own View Element<b>{{data}}</b></p> -->
     <p #viewElement>👀 This is Child's own View Element<b>{{data}}</b></p>
+        <p #viewElement2>Original text here</p>
+
+
+     <input #inputBox type="text" value="Original input">
+    <button (click)="updateAndNotifyParent()">Update & Notify Parent</button>
+
+
