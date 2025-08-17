@@ -4,9 +4,12 @@
     <ng-content></ng-content> <!-- Projected content -->
 
   <!--<p #viewElement>👀 This is Child's own View Element<b>{{data}}</b></p> -->
+
+  <!-- this all  try to demonstrated the ngAfterViewInit-->
     <p #viewElement>👀 This is Child's own View Element<b>{{data}}</b></p>
         <p #viewElement2>Original text here</p>
 
+        <!-- this demonstrated ngAfterViewInit value manupulation send data to parent from child component-->
 
      <input #inputBox type="text" value="Original input">
     <button (click)="updateAndNotifyParent()">Update & Notify Parent</button>

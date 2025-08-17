@@ -15,9 +15,10 @@ export class ChildComponent {
   @ContentChild('projected') projectedContent!: ElementRef;
 
   // for view child
+
   @ViewChild('viewElement') viewElement!: ElementRef;
   @ViewChild('viewElement2') viewElement2!: ElementRef;
-   @ViewChild('inputBox') inputBox!: ElementRef;
+  @ViewChild('inputBox') inputBox!: ElementRef;
 
 
 
@@ -25,6 +26,7 @@ export class ChildComponent {
 
   }
 
+  ///--------------- only pure Angular  without PrimeNG then we can used like this ---
   // 1️⃣ OnInit
   ngOnInit() {
     console.log(" ngOnInit: Input data =", this.data);
@@ -44,6 +46,12 @@ export class ChildComponent {
   ngAfterContentChecked() {
     console.log(" ngAfterContentChecked: Projected content checked =", this.projectedContent.nativeElement.textContent);
   }
+//------------------   Difference in simple words-----------------------
+
+
+// View → deals with the component’s own template + its child components.
+
+// Content → deals with the content projected from the parent into this component (<ng-content>).
 
   // 5️⃣ AfterViewInit → runs once when child view is initialized
   ngAfterViewInit() {

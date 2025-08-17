@@ -3,10 +3,18 @@
     <input [(ngModel)]="parentMessage" placeholder="Type a message..." />
     <button (click)="changeValue()">Change Value</button>
 
-    <app-child [data]="parentMessage"
-    (dataChanged)="receiveChildData($event)">
+    <app-child  [data]="parentMessage" (dataChanged)="receiveChildData($event)"  >
+
+
+<!-- this text will be display inside ng-content because ngAfterConetentInit doesnot have own template-->
       <p #projected>🌟 Projected Content from Parent: {{ parentMessage }}</p>
+
+<!---->
+
     </app-child>
 
+
+
+    <!-- try to demonstration of ngAfterViewInit how manuputate   from child to parent Pases values-->
      <p>Received from Child:</p>
      <p>Input: {{ childInput }}</p>
