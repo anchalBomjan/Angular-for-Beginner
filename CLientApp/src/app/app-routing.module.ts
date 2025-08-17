@@ -5,7 +5,6 @@ const routes: Routes = [
 
     { path: '', redirectTo: '/home', pathMatch: 'full' },
 
-      { path: '', redirectTo: '/home/app-home', pathMatch: 'full' }, // Default route
 
   {
     path:'home',

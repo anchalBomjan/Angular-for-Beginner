@@ -22,9 +22,17 @@ const routes: Routes = [
       {
         path: 'students',
         loadChildren: () => import('../student/student.module').then(m => m.StudentModule)
-      }
+      },
+      
+    {
+      path: 'lifecycle',
+      loadChildren: () => import('../../lifecycle/lifecycle.module').then(m => m.LifecycleModule)
+    }
+     
     ]
-  }
+  },
+  
+  
 ];
 
 @NgModule({
