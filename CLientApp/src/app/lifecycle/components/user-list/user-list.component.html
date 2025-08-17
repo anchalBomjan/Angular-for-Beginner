@@ -3,6 +3,6 @@
 <button (click)="updateCounter()">Count:{{counter}}</button>
 
 <div *ngIf="counter!=5">
-<app-user-create></app-user-create>
+<app-user-create [counter]="counter"></app-user-create>
 </div>
 
